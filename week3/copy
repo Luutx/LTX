@@ -1,0 +1,33 @@
+#include<unistd.h>
+#include<sys/types.h>
+#include<sys/stat.h>
+#include<fcntl.h>
+#include<stdio.h>
+
+int main()
+{
+    int fdsrc,fddes,nbytes;
+    int flags=0_CREATE|0_TRUNC|0_WRONLY;
+    int z;
+    char buf[20],src[20],des[20];
+    printf("请输入目标文件名：");
+    scanf("%s",des);
+    fdsrc=open("/etc/passwd",0_rdonly);
+    if(fdsrc<0)
+    {
+        exit(0);
+    }
+    while((nbytes=read(fdsrc,buf,20))>0)
+    {
+      z=write(fddes,buf,nbytes);
+      if(z<0)
+        {
+          perror("写目标文件出错");
+         }
+     }
+    close(fdsrc);
+    close(fdsrc);
+    printf("复制“/ect/passwd”文件为“%s”文件成功！\n",des);
+    exit(0);
+
+}
